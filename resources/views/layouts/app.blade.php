@@ -11,7 +11,7 @@
     @stack('addon-style')
 
 </head>
-<body>
+<body class="tm-gray-bg">
  
     @include('includes.navbar')
 

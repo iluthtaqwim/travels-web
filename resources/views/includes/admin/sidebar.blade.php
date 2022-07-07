@@ -20,9 +20,9 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('travel-package.index') }}">
+        <a class="nav-link" href="{{ route('kavling.index') }}">
             <i class="fas fa-fw fa-hotel"></i>
-            <span>Paket Travel</span></a>
+            <span>Kavling</span></a>
     </li>
 
     <li class="nav-item">
