@@ -42,7 +42,40 @@
                     <label for="image">Denah</label>
                     <input type="file" accept="image/*" class="form-control" name="denah" placeholder="image">
                 </div>
+                <hr>
+                <label for="image">Gambar Lokasi</label>
+                <div class="row">
+               
+            
+                <div class="col-xs-12 col-md-3 mx-2">
+                    <div class="form-group">
+                        <input type="file" class="custom-file-input" id="customFile" accept="image/*" name="location" placeholder="image">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>  
+                </div>
 
+                <div class="col-xs-12 col-md-3 mx-2">
+                    <div class="form-group">
+                        <input type="file" accept="image/*" class="custom-file-input" name="location" placeholder="image">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>  
+                </div>
+
+                <div class="col-xs-12 col-md-3 mx-2">
+                    <div class="form-group">
+                        
+                        <input type="file" accept="image/*" class="custom-file-input" name="location" placeholder="image">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>  
+                </div>
+
+                <div class="col-xs-12 col-md-3 mx-2">
+                    <div class="form-group">
+                        <input type="file" class="custom-file-input" id="customFile" accept="image/*" name="location" placeholder="image">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>  
+                </div>
+            </div>
                 <button type="submit" class="btn btn-primary btn-block">
                     Simpan
                 </button>

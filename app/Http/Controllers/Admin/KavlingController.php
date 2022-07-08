@@ -40,11 +40,14 @@ class KavlingController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['denah'] = $request->file('denah')->store(
-            'denah'
+        $store = $request->file('denah')->store(
+            'public/denah'
         );
-
-        Kavling::create($data);
+        $image = $request->file('denah');
+        if($store){
+            $data['denah'] = $image->hashName();
+            Kavling::create($data);
+        }
         return redirect()->route('kavling.index');
     }
 
@@ -126,8 +129,14 @@ class KavlingController extends Controller
      * @param  \App\Models\Kavling  $kavling
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kavling $kavling)
+    public function destroy($id)
     {
-        //
+        $delete = Kavling::findOrFail($id);
+        Storage::delete('public/denah'.$delete->denah);
+
+        $delete->delete();
+
+        return redirect()->route('kavling.index');
+        
     }
 }

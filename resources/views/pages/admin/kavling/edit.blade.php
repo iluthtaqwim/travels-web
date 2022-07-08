@@ -45,7 +45,7 @@
                     <input type="file" class="form-control" accept="image/*" name="denah" placeholder="image">
                 </div>
                 <div class="form-group">
-                    <img src="{{ asset('storage/'.$item->denah) }}" style="width:150px" alt="">
+                    <img src="{{ asset('storage/denah/'.$item->denah) }}" style="width:150px" alt="">
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">

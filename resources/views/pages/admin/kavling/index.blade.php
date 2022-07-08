@@ -15,7 +15,7 @@
     <div class="row">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" widht="100%" cellspacing="0">
+                <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <td>No</td>
@@ -28,13 +28,14 @@
                     </thead>
                     <tbody>
                        @forelse ($items as $item)
+                      
                             <tr>
-                                <td>{{ $item->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ $item->description }}</td>
                                 <td>{{ $item->price }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/'.$item->denah) }}" alt="" style="width:150px" class="img-thumbnail"/>
+                                    <img src="{{ asset('storage/denah/'.$item->denah) }}" alt="" style="width:150px" class="img-thumbnail"/>
                                 </td>
                                 <td>
                                     <a href="{{ route('kavling.edit', $item->id) }}" class="btn btn-info">
