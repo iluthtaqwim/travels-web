@@ -41,42 +41,43 @@ class KavlingController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-       
+
         $store = $request->file('denah')->store(
             'public/denah'
         );
         $image = $request->file('denah');
-        if($store){
+        if ($store) {
             $data['denah'] = $image->hashName();
-           $created = Kavling::create($data);
-           if($created){
-            $kavlingId = $created->id;
-            if($request->hasFile('location1')){
-                $storeImage = $this->storeImage($kavlingId, $request->file('location1'));
+            $created = Kavling::create($data);
+            if ($created) {
+                $kavlingId = $created->id;
+                if ($request->hasFile('location1')) {
+                    $storeImage = $this->storeImage($kavlingId, $request->file('location1'));
+                }
+                if ($request->hasFile('location2')) {
+                    $storeImage = $this->storeImage($kavlingId, $request->file('location2'));
+                }
+                if ($request->hasFile('location3')) {
+                    $storeImage = $this->storeImage($kavlingId, $request->file('location3'));
+                }
+                if ($request->hasFile('location4')) {
+                    $storeImage = $this->storeImage($kavlingId, $request->file('location4'));
+                }
             }
-            if($request->hasFile('location2')){
-                $storeImage = $this->storeImage($kavlingId, $request->file('location2'));
-            }
-            if($request->hasFile('location3')){
-                $storeImage = $this->storeImage($kavlingId, $request->file('location3'));
-            }
-            if($request->hasFile('location4')){
-                $storeImage = $this->storeImage($kavlingId, $request->file('location4'));
-            }
-           }
         }
-      
-        return redirect()->route('kavling.index')->with('status', 'Image Has been uploaded successfully in laravel 8');;
+
+        return redirect()->route('kavling.index')->with('status', 'Image Has been uploaded successfully in laravel 8');
     }
 
-   private function storeImage($id, $request){
+    private function storeImage($id, $request)
+    {
         $datas = ['kavling_id' => $id];
         $storeLocation = $request->store('public/denah');
         $location = $request->hashName();
         $datas['image'] = $location;
-        if($datas){
-           $created = KavlingImage::create($datas);
-        }else{
+        if ($datas) {
+            $created = KavlingImage::create($datas);
+        } else {
             $created = null;
         }
         return $created;
@@ -117,42 +118,42 @@ class KavlingController extends Controller
      */
     public function update(Request $request, Kavling $post, $id)
     {
-        
+
         $update = Kavling::find($id);
-   
-            //check if image is uploaded
-            if ($request->hasFile('denah')) {
 
-                //upload new image
-                $image = $request->file('denah');
-              
-                $image->storeAs('public/denah/', $image->hashName());
+        //check if image is uploaded
+        if ($request->hasFile('denah')) {
 
-                //delete old image
-                Storage::delete('public/denah'.$post->denah);
-    
-                //update post with new image
-                $update->update([
-                    'denah'         => $image->hashName(),
-                    'title'         => $request->title,
-                    'description'   => $request->description,
-                    'price'         => $request->price
-                
-                ]);
+            //upload new image
+            $image = $request->file('denah');
 
-            } else {
+            $image->storeAs('public/denah/', $image->hashName());
 
-                //update post without image
-                $update->update([
-                    'title'     => $request->title,
-                    'description'   => $request->description,
-                    'price'         => $request->price
+            //delete old image
+            Storage::delete('public/denah' . $post->denah);
 
-                ]);
-            }
+            //update post with new image
+            $update->update([
+                'denah' => $image->hashName(),
+                'title' => $request->title,
+                'description' => $request->description,
+                'price' => $request->price,
 
-            return redirect()->route('kavling.index');
-        
+            ]);
+
+        } else {
+
+            //update post without image
+            $update->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'price' => $request->price,
+
+            ]);
+        }
+
+        return redirect()->route('kavling.index');
+
     }
 
     /**
@@ -164,11 +165,11 @@ class KavlingController extends Controller
     public function destroy($id)
     {
         $delete = Kavling::findOrFail($id);
-        Storage::delete('public/denah'.$delete->denah);
+        Storage::delete('public/denah' . $delete->denah);
 
         $delete->delete();
 
         return redirect()->route('kavling.index');
-        
+
     }
 }

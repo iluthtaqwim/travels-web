@@ -24,7 +24,7 @@
             <form action="{{ route('kavling.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
             @csrf
-        
+
                 <div class="form-group">
                     <label for="kavling_id">Judul</label>
                    <input type="text" name="title" class="form-control" placeholder="judul" value="{{ $item->title }}">
@@ -50,14 +50,14 @@
                 <hr>
                 <label for="image">Gambar Lokasi</label>
                 <div class="row">
-               
+
             @foreach($location as $loc)
-            
+
                 <div class="col-xs-12 col-md-2 mx-4">
                     <div class="form-group">
                         <input type="file" class="custom-file-input" id="customFile" accept="image/*" name="location{{ $loop->iteration }}" placeholder="image">
                         <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>  
+                    </div>
                     <div class="form-group">
                         <img src="{{ asset('storage/denah/'.$loc->image) }}" style="width:150px" alt="">
                     </div>

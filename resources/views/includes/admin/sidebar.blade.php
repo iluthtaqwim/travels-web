@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Travels <sup>ID</sup></div>
+        <div class="sidebar-brand-text mx-3">CV Mandiri Jaya Group</div>
     </a>
 
     <!-- Divider -->
@@ -26,9 +26,9 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('gallery.index') }}">
+        <a class="nav-link" href="{{ route('about.index') }}">
             <i class="fas fa-fw fa-images"></i>
-            <span>Gallery Travel</span></a>
+            <span>Tentang Kami</span></a>
     </li>
 
     <li class="nav-item">

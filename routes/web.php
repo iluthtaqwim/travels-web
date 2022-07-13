@@ -13,7 +13,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', 'HomeController@index')
     ->name('home');
@@ -24,24 +24,19 @@ Route::get('/checkout', 'CheckoutController@index')
 Route::get('/checkout/success', 'CheckoutController@success')
     ->name('checkout-success');
 
-
-
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware('auth', 'admin')
-    ->group(function(){
+    ->group(function () {
         Route::get('/', 'DashboardController@index')
             ->name('dashboard');
 
         Route::resource('travel-package', 'TravelPackageController');
-        Route::resource('gallery', 'GalleryController');
+        Route::resource('about', 'AboutController');
         Route::resource('transaction', 'TransactionController');
         Route::resource('kavling', 'KavlingController');
     });
 
-
-
 Auth::routes([
-    'verify' => TRUE
+    'verify' => true,
 ]);
-

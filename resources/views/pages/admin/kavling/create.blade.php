@@ -45,39 +45,39 @@
                 <hr>
                 <label for="image">Gambar Lokasi</label>
                 <div class="row">
-               
-            
+
+
                 <div class="col-xs-12 col-md-2 mx-4">
                     <div class="form-group">
-                        <input type="file" class="custom-file-input" id="customFile" accept="image/*" id="location1" name="location1" placeholder="image">
+                        <input type="file" class="custom-file-input" id="customFile" accept="image/*" id="image" name="location1" placeholder="image">
                         <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>  
-                    <div class="col-md-12 mb-2">
-                        <img id="preview-image-before-upload" src="https://www.xylemanalytics.com/Image%20Library/template-images/noImage-lg.gif"
-                            alt="preview image" style="max-height: 200px;">
                     </div>
+                    <!-- <div class="col-md-12 mb-2">
+                        <img id="preview-image" src=""
+                            alt="preview image" style="max-height: 200px;">
+                    </div> -->
                 </div>
 
                 <div class="col-xs-12 col-md-2 mx-4">
                     <div class="form-group">
                         <input type="file" accept="image/*" class="custom-file-input" name="location2" placeholder="image">
                         <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>  
+                    </div>
                 </div>
 
                 <div class="col-xs-12 col-md-2 mx-4">
                     <div class="form-group">
-                        
+
                         <input type="file" accept="image/*" class="custom-file-input" name="location3" placeholder="image">
                         <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>  
+                    </div>
                 </div>
 
                 <div class="col-xs-12 col-md-2 mx-4">
                     <div class="form-group">
                         <input type="file" class="custom-file-input" id="customFile" accept="image/*" name="location4" placeholder="image">
                         <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>  
+                    </div>
                 </div>
             </div>
                 <button type="submit" class="btn btn-primary btn-block">
@@ -89,27 +89,22 @@
 
 </div>
 <!-- /.container-fluid -->
-@endsection
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-      
-    $(document).ready(function (e) {
-     
-       
-       $('#location1').change(function(){
-                
-        let reader = new FileReader();
-     
-        reader.onload = (e) => { 
-     
-          $('#preview-image-before-upload').attr('src', e.target.result); 
+    function readURL(input) {
+        if (input.target.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image-preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.target.files[0]);
         }
-     
-        reader.readAsDataURL(this.files[0]); 
-       
-       });
-       
+    }
+
+    $("#image").change(function(){
+        console.log('cek');
+        readURL(this);
     });
-     
-    </script>
+  </script>
+@endsection
