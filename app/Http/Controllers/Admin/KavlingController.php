@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kavling;
+use App\Models\KavlingImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -40,15 +41,45 @@ class KavlingController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+       
         $store = $request->file('denah')->store(
             'public/denah'
         );
         $image = $request->file('denah');
         if($store){
             $data['denah'] = $image->hashName();
-            Kavling::create($data);
+           $created = Kavling::create($data);
+           if($created){
+            $kavlingId = $created->id;
+            if($request->hasFile('location1')){
+                $storeImage = $this->storeImage($kavlingId, $request->file('location1'));
+            }
+            if($request->hasFile('location2')){
+                $storeImage = $this->storeImage($kavlingId, $request->file('location2'));
+            }
+            if($request->hasFile('location3')){
+                $storeImage = $this->storeImage($kavlingId, $request->file('location3'));
+            }
+            if($request->hasFile('location4')){
+                $storeImage = $this->storeImage($kavlingId, $request->file('location4'));
+            }
+           }
         }
-        return redirect()->route('kavling.index');
+      
+        return redirect()->route('kavling.index')->with('status', 'Image Has been uploaded successfully in laravel 8');;
+    }
+
+   private function storeImage($id, $request){
+        $datas = ['kavling_id' => $id];
+        $storeLocation = $request->store('public/denah');
+        $location = $request->hashName();
+        $datas['image'] = $location;
+        if($datas){
+           $created = KavlingImage::create($datas);
+        }else{
+            $created = null;
+        }
+        return $created;
     }
 
     /**
@@ -71,8 +102,9 @@ class KavlingController extends Controller
     public function edit($id)
     {
         $data = Kavling::findOrFail($id);
+        $location = KavlingImage::where('kavling_id', $id)->get();
 
-        return view('pages.admin.kavling.edit', ['item' => $data]);
+        return view('pages.admin.kavling.edit', ['item' => $data, 'location' => $location]);
 
     }
 

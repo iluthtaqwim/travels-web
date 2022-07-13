@@ -47,6 +47,23 @@
                 <div class="form-group">
                     <img src="{{ asset('storage/denah/'.$item->denah) }}" style="width:150px" alt="">
                 </div>
+                <hr>
+                <label for="image">Gambar Lokasi</label>
+                <div class="row">
+               
+            @foreach($location as $loc)
+            
+                <div class="col-xs-12 col-md-2 mx-4">
+                    <div class="form-group">
+                        <input type="file" class="custom-file-input" id="customFile" accept="image/*" name="location{{ $loop->iteration }}" placeholder="image">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>  
+                    <div class="form-group">
+                        <img src="{{ asset('storage/denah/'.$loc->image) }}" style="width:150px" alt="">
+                    </div>
+                </div>
+
+                @endforeach
 
                 <button type="submit" class="btn btn-primary btn-block">
                     Ubah
