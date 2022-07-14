@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Kavling;
+use App\Models\KavlingImage;
 
 class DetailController extends Controller
 {
-    public function index (Request $request){
-        return view('pages.detail');
+    public function index($id)
+    {
+        $detail = Kavling::find($id);
+        $images = KavlingImage::where('kavling_id', $detail->id)->get();
+        return view('pages.detail', ['detail' => $detail, 'images' => $images]);
     }
 }

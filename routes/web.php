@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +16,13 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', 'HomeController@index')
     ->name('home');
-Route::get('/detail', 'DetailController@index')
+Route::get('/detail/{id}', 'DetailController@index')
     ->name('detail');
-Route::get('/checkout', 'CheckoutController@index')
-    ->name('checkout');
-Route::get('/checkout/success', 'CheckoutController@success')
-    ->name('checkout-success');
+Route::get('/about', 'AboutController@index')
+    ->name('about');
+Route::get('/contact', 'ContactController@index')
+    ->name('contact');
+Route::get('/search', 'HomeController@search')->name('search');
 
 Route::prefix('admin')
     ->namespace('Admin')
