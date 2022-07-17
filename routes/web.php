@@ -35,6 +35,7 @@ Route::prefix('admin')
         Route::resource('about', 'AboutController');
         Route::resource('transaction', 'TransactionController');
         Route::resource('kavling', 'KavlingController');
+        Route::post('desa', 'KavlingController@desa')->name('desa');
     });
 
 Auth::routes([

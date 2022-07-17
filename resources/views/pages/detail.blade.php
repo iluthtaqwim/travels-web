@@ -25,7 +25,9 @@
                     <div class="col-lg-8 pl-lg-0">
                         <div class="card card-details">
                             <h1 style="margin-bottom: 2%">{{ $detail->title }}</h1>
-                            <p style="margin-bottom: 2%">Republic of Indonesia</p>
+                            <p style="margin-bottom: 2%">
+                                {{ 'Kec. ' . $address->nama . ', ' . $address->kabupaten->nama . ', ' . $address->kabupaten->provinsi->nama }}
+                            </p>
 
                             <div class="gallery">
                                 <div class="xzoom-container">
@@ -86,7 +88,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="card card-details card-right">
-                            <h2>Members are going</h2>
+                            {{-- <h2>Members are going</h2>
                             <div class="members my-2">
                                 <img src="{{ url('frontend/images/members-(2).png') }}" alt=""
                                     class="member-image mr-1">
@@ -100,13 +102,35 @@
                                     class="member-image mr-1">
                                 <img src="{{ url('frontend/images/membersplus.png') }}" alt=""
                                     class="member-image mr-1">
-                            </div>
+                            </div> --}}
                             <hr>
-                            <h2>Trip Informations</h2>
-                            <table class="trip-informations">
+                            <h2>Informasi Kavling</h2>
+                            <h5><b>Lokasi</b></h5>
+                            <p> <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                {{ 'Kec. ' . $address->nama . ', ' . $address->kabupaten->nama . ', ' . $address->kabupaten->provinsi->nama }}
+                            </p>
+                            <h5><b>Spesifikasi</b></h5>
+                            <p> <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                {{ $detail->spesification }}
+                            </p>
+                            <h5><b>Link Google Maps</b></h5>
+                            <p> <i class="fa fa-map" aria-hidden="true"></i>
+                                <a href="{{ $detail->location }}" target="_blank"
+                                    rel="noopener noreferrer">{{ $detail->location }}</a>
+                            </p>
+                            <h5><b>Harga</b></h5>
+                            <p style="font-size: 20px; color: rgb(204, 141, 23)">
+                                <strong> Rp {{ $detail->price }}</strong>
+                            </p>
+                            {{-- <table class="trip-informations">
                                 <tr>
-                                    <th width="50%">Date of Departure</th>
-                                    <td widht="50%" class="text-right"> 22 Aug, 2022</td>
+                                    <th width="5%">Lokasi</th>
+                                    <td> {{ 'Kec. ' . $address->nama . ', ' . $address->kabupaten->nama . ', ' . $address->kabupaten->provinsi->nama }}
+                                    </td>
+                                </tr>
+                                <tr>
+
+
                                 </tr>
                                 <tr>
                                     <th width="50%">Duration</th>
@@ -120,12 +144,14 @@
                                     <th width="50%">Price</th>
                                     <td widht="50%" class="text-right"> $199,00 / Person</td>
                                 </tr>
-                            </table>
+                            </table> --}}
                         </div>
                         <div class="join-container">
-                            <a href="{{ route('checkout') }}" class="btn btn-block btn-join-now mt-3 py-2">
-                                Join Now
-                            </a>
+                            <h5><b>Klik untuk info selengkapnya</b></h5>
+                            <a href="https://api.whatsapp.com/send/?phone=62{{ $whatsapp->contact }}&text&type=phone_number&app_absent=0"
+                                target="_blank" rel="noopener noreferrer"> <button type="button" class="btn btn-success"><i
+                                        class="fa fa-whatsapp" aria-hidden="true"></i>
+                                    Whatsapp</button></a>
                         </div>
                     </div>
                 </div>

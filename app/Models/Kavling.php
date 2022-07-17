@@ -11,7 +11,7 @@ class Kavling extends Model
 
     protected $fillable =
         [
-        'title', 'description', 'price', 'denah',
+        'title', 'description', 'price', 'denah', 'kecamatan', 'location', 'spesification',
     ];
 
     public function kavlingImage()

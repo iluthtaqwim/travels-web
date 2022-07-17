@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Kavling;
 use App\Models\KavlingImage;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +30,8 @@ class KavlingController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.kavling.create');
+        $kecamatan = Kecamatan::where('kabupaten_id', 3306)->get();
+        return view('pages.admin.kavling.create', ['kecamatan' => $kecamatan]);
     }
 
     /**
@@ -104,9 +106,20 @@ class KavlingController extends Controller
     {
         $data = Kavling::findOrFail($id);
         $location = KavlingImage::where('kavling_id', $id)->get();
+        $kecamatan = Kecamatan::where('kabupaten_id', 3306)->get();
 
-        return view('pages.admin.kavling.edit', ['item' => $data, 'location' => $location]);
+        return view('pages.admin.kavling.edit', ['item' => $data, 'location' => $location, 'kecamatan' => $kecamatan]);
 
+    }
+
+    public function desa(Request $request)
+    {
+        $id = $request->input('id');
+        $desa = Desa::where('kecamatan_id', $id)->get();
+        $option = '';
+        foreach ($desa as $key => $value) {
+            $option .= '<option value="' . $value->id . '">' . $value->nama . '</option>';
+        }
     }
 
     /**
@@ -135,9 +148,12 @@ class KavlingController extends Controller
             //update post with new image
             $update->update([
                 'denah' => $image->hashName(),
-                'title' => $request->title,
-                'description' => $request->description,
-                'price' => $request->price,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+                'kecamatan' => $request->input('kecamatan'),
+                'location' => $request->input('location'),
+                'spesification' => $request->input('spesification'),
 
             ]);
 
@@ -148,8 +164,41 @@ class KavlingController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
                 'price' => $request->price,
-
+                'kecamatan' => $request->input('kecamatan'),
+                'location' => $request->input('location'),
+                'spesification' => $request->input('spesification'),
             ]);
+        }
+
+        $imageKavling = KavlingImage::where('kavling_id', $id)->orderBy('id', 'ASC')->get();
+        $countImages = $imageKavling->count();
+
+        if ($request->hasFile('location1')) {
+            $image = $request->file('location1');
+            $image->storeAs('public/denah/', $image->hashName());
+
+            if ($countImages >= 1) {
+                unlink('public/denah/' . $imageKavling[0]->image);
+                $update = KavlingImage::where('id', $imageKavling[0]->id)->update(['image' => $image->hashName()]);
+            } else {
+                $storeImage = $this->storeImage($id, $request->file('location1'));
+            }
+        }
+        if ($request->hasFile('location2')) {
+            $image = $request->file('location2');
+            $image->storeAs('public/denah/', $image->hashName());
+            if ($countImages >= 2) {
+                unlink('public/denah/' . $imageKavling[1]->image);
+                $update = KavlingImage::where('id', $imageKavling[1]->id)->update(['image' => $image->hashName()]);
+            } else {
+                $storeImage = $this->storeImage($id, $request->file('location2'));
+            }
+        }
+        if ($request->hasFile('location3')) {
+            $storeImage = $this->storeImage($id, $request->file('location3'));
+        }
+        if ($request->hasFile('location4')) {
+            $storeImage = $this->storeImage($id, $request->file('location4'));
         }
 
         return redirect()->route('kavling.index');

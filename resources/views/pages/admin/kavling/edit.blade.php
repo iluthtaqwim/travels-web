@@ -37,8 +37,32 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="location">Kecamatan</label>
+                        <select name="kecamatan" class="form-control" id="kecamatan" required>
+                            <option value="">-- Silahkan pilih kecamatan --</option>
+                            @foreach ($kecamatan as $kec)
+                                @if ($kec->id == $item->kecamatan)
+                                    <option selected value="{{ $kec->id }}">{{ $kec->nama }}</option>
+                                @endif
+                                <option value="{{ $kec->id }}">{{ $kec->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Titik Lokasi (Google Maps)</label>
+                        <input type="text" class="form-control" id="maps" name="location"
+                            placeholder="Contoh : https://goo.gl/maps/96qGME3nmNv2sdaz7" value="{{ $item->location }}">
+                    </div>
+
+                    <div class="form-group">
                         <label for="title">Harga</label>
                         <input type="text" class="form-control" name="price" value="{{ $item->price }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Spesifikasi</label>
+                        <textarea name="spesification" class="form-control" cols="60">{{ $item->spesification }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -52,23 +76,57 @@
                     <label for="image">Gambar Lokasi</label>
                     <div class="row">
 
+
+                        <div class="col-xs-12 col-md-2 mx-4">
+                            <div class="form-group">
+                                <input type="file" class="custom-file-input" id="customFile" accept="image/*"
+                                    id="image" name="location1" placeholder="image">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                            <!-- <div class="col-md-12 mb-2">
+                                                                            <img id="preview-image" src=""
+                                                                                alt="preview image" style="max-height: 200px;">
+                                                                        </div> -->
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 mx-4">
+                            <div class="form-group">
+                                <input type="file" accept="image/*" class="custom-file-input" name="location2"
+                                    placeholder="image">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 mx-4">
+                            <div class="form-group">
+
+                                <input type="file" accept="image/*" class="custom-file-input" name="location3"
+                                    placeholder="image">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-2 mx-4">
+                            <div class="form-group">
+                                <input type="file" class="custom-file-input" id="customFile" accept="image/*"
+                                    name="location4" placeholder="image">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         @foreach ($location as $loc)
                             <div class="col-xs-12 col-md-2 mx-4">
-                                <div class="form-group">
-                                    <input type="file" class="custom-file-input" id="customFile" accept="image/*"
-                                        name="location{{ $loop->iteration }}" placeholder="image">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                </div>
                                 <div class="form-group">
                                     <img src="{{ asset('storage/denah/' . $loc->image) }}" style="width:150px"
                                         alt="">
                                 </div>
                             </div>
                         @endforeach
-
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Ubah
-                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Ubah
+                    </button>
                 </form>
             </div>
         </div>
@@ -84,7 +142,28 @@
 
             });
 
+            // $('#kecamatan').change(function() {
+            //     $('#desa').removeAttr('disabled');
+            //     var url = "{{ url('admin/desa') }}";
+            //     var id = $('#kecamatan').val();
+            //     $.ajax({
+            //         url: url,
+            //         type: "post",
+            //         data: {
+            //             id: id
+            //         },
+            //         success: function(data, status) {
+            //             console.log(data);
+            //         }
+
+            //     });
+            // $.post(url, {
+            //     id: id
+            // }, function(data) {
+            //     $("#desa").html(data);
+            // });
         });
     </script>
+
     <!-- /.container-fluid -->
 @endsection

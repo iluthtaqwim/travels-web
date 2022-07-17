@@ -278,7 +278,11 @@
                     </div>
                 </div>
             </div> --}}
+
     </section>
+    <div class="container text-center">
+        {!! $listsKavling->links() !!}
+    </div>
 
     <!-- white bg -->
     <section class="tm-white-bg section-padding-bottom">

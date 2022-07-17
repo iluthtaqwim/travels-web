@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $listsKavling = Kavling::latest()->limit(8)->get();
+        $listsKavling = Kavling::latest()->paginate(4);
         return view('pages.home', ['listsKavling' => $listsKavling]);
     }
 
@@ -20,7 +20,7 @@ class HomeController extends Controller
         if ($keywords) {
             $result = Kavling::search($keywords)->get();
         } else {
-            $result = Kavling::latest()->limit(8)->get();
+            $result = Kavling::latest()->paginate(5);
         }
 
         return view('pages.home', ['listsKavling' => $result]);
