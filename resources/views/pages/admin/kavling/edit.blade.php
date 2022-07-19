@@ -62,7 +62,7 @@
 
                     <div class="form-group">
                         <label for="title">Spesifikasi</label>
-                        <textarea name="spesification" class="form-control" cols="60">{{ $item->spesification }}</textarea>
+                        <textarea name="spesification" id="spesification" class="form-control" cols="60">{{ $item->spesification }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -137,6 +137,11 @@
         $(document).ready(function() {
 
             $('#description').summernote({
+
+                height: 300,
+
+            });
+            $('#spesification').summernote({
 
                 height: 300,
 

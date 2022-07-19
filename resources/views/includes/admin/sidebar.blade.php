@@ -32,9 +32,9 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('transaction.index') }}">
+        <a class="nav-link" href="{{ route('testimoni.index') }}">
             <i class="fas fa-fw fa-dollar-sign"></i>
-            <span>Transaksi</span></a>
+            <span>Testimoni</span></a>
     </li>
 
     <hr class="sidebar-divider">

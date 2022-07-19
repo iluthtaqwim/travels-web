@@ -110,9 +110,8 @@
                                 {{ 'Kec. ' . $address->nama . ', ' . $address->kabupaten->nama . ', ' . $address->kabupaten->provinsi->nama }}
                             </p>
                             <h5><b>Spesifikasi</b></h5>
-                            <p> <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                {{ $detail->spesification }}
-                            </p>
+                                @php echo $detail->spesification; @endphp
+
                             <h5><b>Link Google Maps</b></h5>
                             <p> <i class="fa fa-map" aria-hidden="true"></i>
                                 <a href="{{ $detail->location }}" target="_blank"

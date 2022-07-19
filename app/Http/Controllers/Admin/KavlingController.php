@@ -143,7 +143,7 @@ class KavlingController extends Controller
             $image->storeAs('public/denah/', $image->hashName());
 
             //delete old image
-            Storage::delete('public/denah' . $post->denah);
+            Storage::delete('public/denah/' . $post->denah);
 
             //update post with new image
             $update->update([
@@ -214,7 +214,7 @@ class KavlingController extends Controller
     public function destroy($id)
     {
         $delete = Kavling::findOrFail($id);
-        Storage::delete('public/denah' . $delete->denah);
+        Storage::delete('public/denah/' . $delete->denah);
 
         $delete->delete();
 

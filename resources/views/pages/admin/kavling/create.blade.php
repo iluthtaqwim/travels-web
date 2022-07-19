@@ -56,7 +56,7 @@
 
                     <div class="form-group">
                         <label for="title">Spesifikasi</label>
-                        <textarea name="spesification" class="form-control" cols="60"></textarea>
+                        <textarea name="spesification" id="spesification" class="form-control" cols="60"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -118,9 +118,16 @@
         $(document).ready(function() {
 
             $('#description').summernote({
-
+                disableResizeEditor: true,
                 height: 300,
 
+            });
+            $('.note-statusbar').hide();
+
+            $('#spesification').summernote({
+
+                height: 100,
+                disableResizeEditor: true,
             });
 
         });

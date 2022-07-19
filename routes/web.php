@@ -33,7 +33,7 @@ Route::prefix('admin')
 
         Route::resource('travel-package', 'TravelPackageController');
         Route::resource('about', 'AboutController');
-        Route::resource('transaction', 'TransactionController');
+        Route::resource('testimoni', 'TestimoniController');
         Route::resource('kavling', 'KavlingController');
         Route::post('desa', 'KavlingController@desa')->name('desa');
     });
