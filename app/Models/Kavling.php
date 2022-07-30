@@ -25,4 +25,28 @@ class Kavling extends Model
             ->orWhere('description', 'like', '%' . $keywords . '%')
             ->orWhere('price', 'like', '%' . $keywords . '%');
     }
+
+    public function scopeKecamatan($query, $kecamatan){
+        if($kecamatan){
+            $query->where('kecamatan', $kecamatan);
+        }
+    }
+
+    public function scopeCreatedAt($query, $created_at){
+        if($created_at){
+            $query->whereDate('created_at', $created_at);
+        }
+    }
+
+    public function scopePriceRange($query, $range_start, $range_end){
+        if($range_start && $range_end == null){
+            $query->where('price','>=', $range_start);
+        }
+        if($range_start == null && $range_end){
+            $query->where('price','<=', $range_end);
+        }
+        if($range_start && $range_end){
+            $query->whereBetween('price',[$range_start, $range_end]);
+        }
+    }
 }

@@ -42,6 +42,20 @@
                             placeholder="">
                     </div>
 
+                    <div class="form-group">
+                        <label for="title">Alamat</label>
+                        <input type="text" class="form-control" value="{{ $datas->address }}" name="address"
+                               placeholder="alamat">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Link Google Maps</label>
+                        <br>
+                        <small style="color: darkorange">Cara mengisi link : Kunjungi maps.google.com, cari titik kantor anda, klik bagikan, pilih sematkan peta, lalu salin HTML</small>
+                        <input type="text" class="form-control" value="{{ $datas->maps }}" name="maps"
+                               placeholder="link google maps">
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary btn-block">
                         Simpan

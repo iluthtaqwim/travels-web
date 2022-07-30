@@ -27,14 +27,20 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('about.index') }}">
-            <i class="fas fa-fw fa-images"></i>
+            <i class="fas fa-fw fa-exclamation-circle"></i>
             <span>Tentang Kami</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('testimoni.index') }}">
-            <i class="fas fa-fw fa-dollar-sign"></i>
+            <i class="fas fa-fw fa-comment-alt"></i>
             <span>Testimoni</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('banner.index') }}">
+            <i class="fas fa-fw fa-images"></i>
+            <span>Banner</span></a>
     </li>
 
     <hr class="sidebar-divider">

@@ -9,30 +9,20 @@
         <!-- Flexslider -->
         <div class="flexslider flexslider-banner">
             <ul class="slides">
-                <li>
-                    <div class="tm-banner-inner">
-                        <h1 class="tm-banner-title">Find <span class="tm-yellow-text">The Best</span> Place</h1>
-                        <p class="tm-banner-subtitle">For Your Holidays</p>
-                        <a href="#more" class="tm-banner-link">Learn More</a>
-                    </div>
-                    <img src="{{ url('frontend/images/banner-1.jpg') }}" alt="Image" />
-                </li>
-                <li>
-                    <div class="tm-banner-inner">
-                        <h1 class="tm-banner-title">Lorem <span class="tm-yellow-text">Ipsum</span> Dolor</h1>
-                        <p class="tm-banner-subtitle">Wonderful Destinations</p>
-                        <a href="#more" class="tm-banner-link">Learn More</a>
-                    </div>
-                    <img src="{{ url('frontend/images/banner-2.jpg') }}" alt="Image" />
-                </li>
-                <li>
-                    <div class="tm-banner-inner">
-                        <h1 class="tm-banner-title">Proin <span class="tm-yellow-text">Gravida</span> Nibhvell</h1>
-                        <p class="tm-banner-subtitle">Velit Auctor</p>
-                        <a href="#more" class="tm-banner-link">Learn More</a>
-                    </div>
-                    <img src="{{ url('frontend/images/banner-3.jpg') }}" alt="Image" />
-                </li>
+                @foreach($banner as $ban)
+                    <li>
+                        <div class="tm-banner-inner">
+                            <h1 class="tm-banner-title">{{$ban->title}}</h1>
+                            <p class="tm-banner-subtitle">{{$ban->subtitle}}</p>
+                            @if($ban->link == '' || $ban->link == null)
+                                <a href="#more" class="tm-banner-link">Selengkapnya</a>
+                            @else
+                                <a href="{{$ban->link}}" target="_blank" class="tm-banner-link">Selengkapnya</a>
+                            @endif
+                        </div>
+                        <img src="{{ asset('storage/banner/'. $ban->image) }}" alt="Image"/>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </section>
@@ -45,53 +35,42 @@
                 <div class="tm-home-box-1">
                     <ul class="nav nav-tabs tm-white-bg" role="tablist" id="hotelCarTabs">
                         <li role="presentation" class="active">
-                            <a href="#hotel" aria-controls="hotel" role="tab" data-toggle="tab">Hotel</a>
+                            <a href="#hotel" aria-controls="hotel" role="tab" data-toggle="tab">Filter Kavling</a>
                         </li>
-                        <li role="presentation">
-                            <a href="#car" aria-controls="car" role="tab" data-toggle="tab">Car Rental</a>
-                        </li>
+
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active tm-white-bg" id="hotel">
                             <div class="tm-search-box effect2">
-                                <form action="#" method="post" class="hotel-search-form">
+                                <form action="{{route('filter')}}" method="get" class="hotel-search-form">
+
                                     <div class="tm-form-inner">
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option value="">-- Select Hotel -- </option>
-                                                <option value="shangrila">Shangri-La</option>
-                                                <option value="chatrium">Chatrium</option>
-                                                <option value="fourseasons">Four Seasons</option>
-                                                <option value="hilton">Hilton</option>
+                                            <select name="kecamatan" class="form-control">
+                                                <option value="">-- Pilih Lokasi --</option>
+                                                @foreach($kecamatan as $lokasi)
+                                                    <option value="{{$lokasi->id}}" }}>{{$lokasi->nama}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <div class='input-group date' id='datetimepicker1'>
-                                                <input type='text' class="form-control" placeholder="Check-in Date" />
+                                                <input type='text' class="form-control" name="created_at"
+                                                       placeholder="Tanggal upload"/>
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker2'>
-                                                <input type='text' class="form-control" placeholder="Check-out Date" />
-                                                <span class="input-group-addon">
-                                                    <span class="fa fa-calendar"></span>
-                                                </span>
-                                            </div>
+                                            <input type="number" class="form-control" placeholder="Harga mulai dari"
+                                                   name="range_start">
                                         </div>
-                                        <div class="form-group margin-bottom-0">
-                                            <select class="form-control">
-                                                <option value="">-- Guests -- </option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5p">5+</option>
-                                            </select>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" placeholder="Harga maksimal"
+                                                   name="range_end">
                                         </div>
                                     </div>
                                     <div class="form-group tm-yellow-gradient-bg text-center">
@@ -106,7 +85,7 @@
                                     <div class="tm-form-inner">
                                         <div class="form-group">
                                             <select class="form-control">
-                                                <option value="">-- Select Model -- </option>
+                                                <option value="">-- Select Model --</option>
                                                 <option value="shangrila">BMW</option>
                                                 <option value="chatrium">Mercedes-Benz</option>
                                                 <option value="fourseasons">Toyota</option>
@@ -115,7 +94,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class='input-group date-time' id='datetimepicker3'>
-                                                <input type='text' class="form-control" placeholder="Pickup Date" />
+                                                <input type='text' class="form-control" placeholder="Pickup Date"/>
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
@@ -123,7 +102,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class='input-group date-time' id='datetimepicker4'>
-                                                <input type='text' class="form-control" placeholder="Return Date" />
+                                                <input type='text' class="form-control" placeholder="Return Date"/>
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
@@ -131,7 +110,7 @@
                                         </div>
                                         <div class="form-group">
                                             <select class="form-control">
-                                                <option value="">-- Options -- </option>
+                                                <option value="">-- Options --</option>
                                                 <option value="">Child Seat</option>
                                                 <option value="">GPS Navigator</option>
                                                 <option value="">Insurance</option>
@@ -152,7 +131,7 @@
                 <div style="margin-bottom: 8%;" class="col-lg-4 col-md-4 col-sm-6">
                     <div class="tm-home-box-1 effect2">
                         <img src="{{ asset('storage/denah/' . $list->denah) }}" width="346px" height="350px"
-                            alt="image">
+                             alt="image">
                         <a href="{{ route('detail', $list->id) }}">
                             <div class="tm-green-gradient-bg tm-city-price-container" style="padding: 2%">
                                 <div class="d-flex flex-column">
@@ -168,117 +147,9 @@
                     </div>
                 </div>
             @endforeach
-            {{-- <div class="flex-column flex">
-                <div class="section-margin-top">
-                    <div class="row">
-                        <div class="tm-section-header">
-                            <div class="col-lg-3 col-md-3 col-sm-3">
-                                <hr>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <h2 class="tm-section-title">Lorem Ipsum Dolor</h2>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3">
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-                            <div class="tm-home-box-2">
-                                <img src="https://templatemo.com/templates/templatemo_475_holiday/img/index-03.jpg"
-                                    alt="image" class="img-responsive">
-                                <h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-                                <p class="tm-date">28 March 2016</p>
-                                <div class="tm-home-box-2-container">
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                    <a href="#" class="tm-home-box-2-link"><span
-                                            class="tm-home-box-2-description">Travel</span></a>
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-                            <div class="tm-home-box-2">
-                                <img src="img/index-04.jpg" alt="image" class="img-responsive">
-                                <h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-                                <p class="tm-date">26 March 2016</p>
-                                <div class="tm-home-box-2-container">
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                    <a href="#" class="tm-home-box-2-link"><span
-                                            class="tm-home-box-2-description">Travel</span></a>
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-                            <div class="tm-home-box-2">
-                                <img src="img/index-05.jpg" alt="image" class="img-responsive">
-                                <h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-                                <p class="tm-date">24 March 2016</p>
-                                <div class="tm-home-box-2-container">
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                    <a href="#" class="tm-home-box-2-link"><span
-                                            class="tm-home-box-2-description">Travel</span></a>
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-                            <div class="tm-home-box-2 tm-home-box-2-right">
-                                <img src="img/index-06.jpg" alt="image" class="img-responsive">
-                                <h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-                                <p class="tm-date">22 March 2016</p>
-                                <div class="tm-home-box-2-container">
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                    <a href="#" class="tm-home-box-2-link"><span
-                                            class="tm-home-box-2-description">Travel</span></a>
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-                            <div class="tm-home-box-2 tm-home-box-2-right">
-                                <img src="img/index-06.jpg" alt="image" class="img-responsive">
-                                <h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-                                <p class="tm-date">22 March 2016</p>
-                                <div class="tm-home-box-2-container">
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                    <a href="#" class="tm-home-box-2-link"><span
-                                            class="tm-home-box-2-description">Travel</span></a>
-                                    <a href="#" class="tm-home-box-2-link"><i
-                                            class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <p class="home-description">Holiday is free Bootstrap v3.3.5 responsive template for tour
-                                and
-                                travel
-                                websites. You can download and use this layout for any purpose. You do not need to
-                                provide a
-                                credit
-                                link to us. If you have any question, feel free to <a
-                                    href="http://www.facebook.com/templatemo" target="_parent">contact us</a>. Credit
-                                goes to <a rel="nofollow" href="http://unsplash.com" target="_parent">Unspash</a> for
-                                images used in this template.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
 
+
+        </div>
     </section>
     <div class="container text-center">
         {!! $listsKavling->links() !!}
@@ -286,93 +157,40 @@
 
     <!-- white bg -->
     <section class="tm-white-bg section-padding-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="tm-section-header section-margin-top">
-                    <div class="col-lg-4 col-md-3 col-sm-3">
-                        <hr>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <h2 class="tm-section-title">Popular Packages</h2>
-                    </div>
-                    <div class="col-lg-4 col-md-3 col-sm-3">
-                        <hr>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="tm-home-box-3">
-                        <div class="tm-home-box-3-img-container">
-                            <img src="img/index-07.jpg" alt="image" class="img-responsive">
-                        </div>
-                        <div class="tm-home-box-3-info">
-                            <p class="tm-home-box-3-description">Proin gravida nibhvell velit auctor aliquet. Aenean
-                                sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
-                            <div class="tm-home-box-2-container">
-                                <a href="#" class="tm-home-box-2-link"><i
-                                        class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                <a href="#" class="tm-home-box-2-link"><span
-                                        class="tm-home-box-2-description box-3">Travel</span></a>
-                                <a href="#" class="tm-home-box-2-link"><i
-                                        class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
+
+        <div class="flex-column flex">
+            <div class="container">
+                <div class="section-margin-top">
+
+                    <div class="row">
+                        <div class="tm-section-header">
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <hr>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <h2 class="tm-section-title">Terjual</h2>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <hr>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="tm-home-box-3">
-                        <div class="tm-home-box-3-img-container">
-                            <img src="img/index-08.jpg" alt="image" class="img-responsive">
-                        </div>
-                        <div class="tm-home-box-3-info">
-                            <p class="tm-home-box-3-description">Proin gravida nibhvell velit auctor aliquet. Aenean
-                                sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
-                            <div class="tm-home-box-2-container">
-                                <a href="#" class="tm-home-box-2-link"><i
-                                        class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                <a href="#" class="tm-home-box-2-link"><span
-                                        class="tm-home-box-2-description box-3">Travel</span></a>
-                                <a href="#" class="tm-home-box-2-link"><i
-                                        class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
+                    <div class="row">
+                        @foreach($testimoni as $test)
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
+                                <div class="tm-home-box-2">
+                                    <img src="{{asset('storage/testimoni/' . $test->photo)}}"
+                                         alt="image" class="img-responsive">
+                                    <h3>@php echo $test->description @endphp</h3>
+                                    <p class="tm-date">{{$test->kecamatan->nama}}</p>
+                                    <div class="tm-home-box-2-container">
+                                        <p style="text-align: center">{{$test->name}}</p>
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="tm-home-box-3">
-                        <div class="tm-home-box-3-img-container">
-                            <img src="img/index-09.jpg" alt="image" class="img-responsive">
-                        </div>
-                        <div class="tm-home-box-3-info">
-                            <p class="tm-home-box-3-description">Proin gravida nibhvell velit auctor aliquet. Aenean
-                                sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
-                            <div class="tm-home-box-2-container">
-                                <a href="#" class="tm-home-box-2-link"><i
-                                        class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                <a href="#" class="tm-home-box-2-link"><span
-                                        class="tm-home-box-2-description box-3">Travel</span></a>
-                                <a href="#" class="tm-home-box-2-link"><i
-                                        class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="tm-home-box-3">
-                        <div class="tm-home-box-3-img-container">
-                            <img src="img/index-10.jpg" alt="image" class="img-responsive">
-                        </div>
-                        <div class="tm-home-box-3-info">
-                            <p class="tm-home-box-3-description">Proin gravida nibhvell velit auctor aliquet. Aenean
-                                sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
-                            <div class="tm-home-box-2-container">
-                                <a href="#" class="tm-home-box-2-link"><i
-                                        class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                                <a href="#" class="tm-home-box-2-link"><span
-                                        class="tm-home-box-2-description box-3">Travel</span></a>
-                                <a href="#" class="tm-home-box-2-link"><i
-                                        class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>

@@ -68,7 +68,7 @@ class KavlingController extends Controller
             }
         }
 
-        return redirect()->route('kavling.index')->with('status', 'Image Has been uploaded successfully in laravel 8');
+        return redirect()->route('kavling.index')->with('status', 'Image Has been uploaded successfully');
     }
 
     private function storeImage($id, $request)

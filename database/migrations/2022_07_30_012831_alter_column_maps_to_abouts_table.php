@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateColumnDescriptionAbout extends Migration
+class AlterColumnMapsToAboutsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class UpdateColumnDescriptionAbout extends Migration
     public function up()
     {
         Schema::table('abouts', function (Blueprint $table) {
-
-            $table->text('description')->change();
-            $table->string('contact.blade.php')->nullable();
+            $table->text('maps')->change();
         });
     }
 
@@ -27,6 +25,8 @@ class UpdateColumnDescriptionAbout extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('abouts', function (Blueprint $table) {
+            //
+        });
     }
 }

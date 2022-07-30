@@ -53,36 +53,36 @@
                             <br>
 
                             <div class="features row">
-                                <div class="col-md-4">
-                                    <div class="description">
-                                        <img src="{{ url('frontend/images/Ic-event.png') }}" alt=""
-                                            class="featured-image">
-                                        <div class="description">
-                                            <h3>Featured Event</h3>
-                                            <p>Tari Kecak</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 border-left">
-                                    <div class="description">
-                                        <img src="{{ url('frontend/images/Ic-language.png') }}" alt=""
-                                            class="featured-image">
-                                        <div class="description">
-                                            <h3>Languages</h3>
-                                            <p>Bahasa Indonesia</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 border-left">
-                                    <div class="description">
-                                        <img src="{{ url('frontend/images/Ic-foods.png') }}" alt=""
-                                            class="featured-image">
-                                        <div class="description">
-                                            <h3>Foods</h3>
-                                            <p>Local foods</p>
-                                        </div>
-                                    </div>
-                                </div>
+{{--                                <div class="col-md-4">--}}
+{{--                                    <div class="description">--}}
+{{--                                        <img src="{{ url('frontend/images/Ic-event.png') }}" alt=""--}}
+{{--                                            class="featured-image">--}}
+{{--                                        <div class="description">--}}
+{{--                                            <h3>Featured Event</h3>--}}
+{{--                                            <p>Tari Kecak</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-4 border-left">--}}
+{{--                                    <div class="description">--}}
+{{--                                        <img src="{{ url('frontend/images/Ic-language.png') }}" alt=""--}}
+{{--                                            class="featured-image">--}}
+{{--                                        <div class="description">--}}
+{{--                                            <h3>Languages</h3>--}}
+{{--                                            <p>Bahasa Indonesia</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-4 border-left">--}}
+{{--                                    <div class="description">--}}
+{{--                                        <img src="{{ url('frontend/images/Ic-foods.png') }}" alt=""--}}
+{{--                                            class="featured-image">--}}
+{{--                                        <div class="description">--}}
+{{--                                            <h3>Foods</h3>--}}
+{{--                                            <p>Local foods</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     </div>

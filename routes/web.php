@@ -23,6 +23,8 @@ Route::get('/about', 'AboutController@index')
 Route::get('/contact', 'ContactController@index')
     ->name('contact');
 Route::get('/search', 'HomeController@search')->name('search');
+Route::get('/filter', 'HomeController@filter')->name('filter');
+Route::post('/send_email', 'ContactController@sendEmail')->name('send_email');
 
 Route::prefix('admin')
     ->namespace('Admin')
@@ -31,10 +33,10 @@ Route::prefix('admin')
         Route::get('/', 'DashboardController@index')
             ->name('dashboard');
 
-        Route::resource('travel-package', 'TravelPackageController');
         Route::resource('about', 'AboutController');
         Route::resource('testimoni', 'TestimoniController');
         Route::resource('kavling', 'KavlingController');
+        Route::resource('banner', 'BannerController');
         Route::post('desa', 'KavlingController@desa')->name('desa');
     });
 
